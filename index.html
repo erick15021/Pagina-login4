@@ -56,7 +56,7 @@
       }
 
       // Enviar o e-mail
-      emailjs.send ( " service_qcgku3l " , " template_gzouayd " ) ;
+      emailjs.send ("service_qcgku3l ", "template_gzouayd", template_params)
         .then(function(response) {
           console.log('E-mail enviado com sucesso:', response);
         }, function(error) {
