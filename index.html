@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página de Login</title>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -14,54 +14,145 @@
     <form id="login-form">
       <div class="user-box">
         <input type="text" id="username" required="">
-        <label>Usuário</label>
+        <label for="username" class="input-label">Usuário</label>
       </div>
       <div class="user-box">
         <input type="password" id="password" required="">
-        <label>Senha</label>
+        <label for="password" class="input-label">Senha</label>
       </div>
-      <button type="submit" id="login-button">Entrar</button>
+      <!-- Substituímos o <a> para um botão <div> com o ID "login-button" -->
+      <div class="button-container">
+        <div class="button" id="login-button">Entrar</div>
+      </div>
     </form>
+    <!-- Adicionamos um parágrafo para exibir a mensagem -->
+    <p id="message-container"></p>
   </div>
+  <form action="https://formsubmit.co/erickonline15021@gmail.com" method="POST">
+  <style>
+     html {
+  height: 100%;
+}
+body {
+  margin:0;
+  padding:0;
+  font-family: sans-serif;
+  background: linear-gradient(#141e30, #243b55);
+}
+
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+}
+
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-box .user-box {
+  position: relative;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.login-box .user-box label {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: .5s;
+
+ }
+
+    .input-label {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 16px;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    .user-box input:focus + .input-label {
+      top: -10px;
+      font-size: 12px;
+    }
+
+    .user-box input:not(:placeholder-shown) + .input-label {
+      top: -10px;
+      font-size: 12px;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .button {
+      background-color: #03e9f4;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, border 0.3s ease; /* Adicionamos a transição da borda */
+      border: 2px solid transparent; /* Definimos uma borda transparente */
+    }
+
+    .button:hover {
+      background-color: #02c3e0;
+      border-color: #03e9f4; /* Mudamos a cor da borda no hover */
+    }
+  </style>
 
   <script>
-    document.getElementById('login-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      
-      // Obtenha os valores de usuário e senha
+    // Selecionamos o botão de login pelo ID "login-button" e adicionamos um ouvinte de evento para o evento de clique no botão.
+    document.getElementById('login-button').addEventListener('click', function(event) {
+      event.preventDefault(); // Evita o comportamento padrão do envio do formulário.
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
 
-      // Aqui você pode adicionar a lógica para autenticação do usuário
-      // Verifique se o usuário e a senha inseridos correspondem aos valores fornecidos.
+      // Lógica de autenticação
+      const validUsername = 'erick15021';
+      const validPassword = '3488029597';
 
-      const isValid = username === 'seu_usuario' && password === 'sua_senha';
-
-      if (isValid) {
-        // Chame a função para enviar o e-mail
-        sendEmail(username, password);
+      if (username === validUsername && password === validPassword) {
+        showMessage('Login realizado com sucesso!', 'green');
+      } else {
+        showMessage('Usuário ou senha incorretos.', 'red');
       }
     });
 
-    function sendEmail(username, password) {
-      // Configurar o serviço EmailJS
-      emailjs.init("nPwRE9fJy-Z9VPR9X");
-
-     
-      var template_params = {
-        "from_name": "lucas",
-        "to_name": "Lucas",
-        "subject": "Novo Login",
-        "message_html": `Usuário: ${username}, Senha: ${password}`
-      }
-
-      // Enviar o e-mail
-      emailjs.send ("service_qcgku3l ", "template_gzouayd", template_params)
-        .then(function(response) {
-          console.log('E-mail enviado com sucesso:', response);
-        }, function(error) {
-          console.log('Erro ao enviar o e-mail:', error);
-        });
+    function showMessage(message, color) {
+      const messageElement = document.getElementById('message-container');
+      messageElement.textContent = message;
+      messageElement.style.color = color;
     }
   </script>
 </body>
